@@ -1,0 +1,26 @@
+{
+  "name": "wagtail_pdfjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run build",
+    "build": "node scripts/copy-pdfjs.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjkasi/wagtail_pdfjs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/kjkasi/wagtail_pdfjs/issues"
+  },
+  "homepage": "https://github.com/kjkasi/wagtail_pdfjs#readme",
+  "devDependencies": {
+    "pdfjs-dist": "6.3.289"
+  },
+  "private": true
+}
