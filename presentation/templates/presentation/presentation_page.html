@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}template-presentationpage{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'presentation/presentation.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="presentation-page">
+    <header class="presentation-header">
+        <h1>{{ page.title }}</h1>
+    </header>
+
+    {% if page.pdf %}
+        <div
+            id="pdf-viewer"
+            class="pdf-viewer"
+            data-pdf-url="{{ page.pdf.url }}"
+            data-pdfjs-url="{% static 'pdfjs/pdf.mjs' %}"
+            data-worker-url="{% static 'pdfjs/pdf.worker.mjs' %}"
+        >
+            <div id="viewer-status" class="viewer-status" role="status" aria-live="polite">
+                Загрузка презентации…
+            </div>
+
+            <div class="viewer-layout" hidden>
+                <section class="slide-panel" aria-label="Слайд презентации">
+                    <div id="canvas-container" class="canvas-container">
+                        <canvas id="pdf-canvas" role="img" aria-label="Текущий слайд презентации"></canvas>
+                    </div>
+                </section>
+
+                <aside class="slide-notes" aria-labelledby="notes-heading">
+                    <h2 id="notes-heading">Описание слайда</h2>
+                    <div id="annotations" aria-live="polite"></div>
+                </aside>
+            </div>
+
+            <nav class="viewer-controls" aria-label="Навигация по презентации" hidden>
+                <button id="previous-page" type="button" aria-label="Предыдущий слайд">← Назад</button>
+                <span class="page-counter" aria-live="polite">
+                    <span id="current-page">1</span> / <span id="total-pages">0</span>
+                </span>
+                <button id="next-page" type="button" aria-label="Следующий слайд">Вперёд →</button>
+            </nav>
+        </div>
+    {% else %}
+        <p class="viewer-status viewer-status--error" role="alert">PDF не выбран.</p>
+    {% endif %}
+</main>
+{% endblock %}
+
+{% block extra_js %}
+{% if page.pdf %}
+<script type="module" src="{% static 'presentation/presentation.js' %}"></script>
+{% endif %}
+{% endblock %}
